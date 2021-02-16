@@ -15,7 +15,7 @@ const Movie = ({ show }) => {
             <strong>{show.name}</strong>
           </Card.Title>
         </Link>
-        <Card.Text as='h6'>Genre : {show.rating.average}</Card.Text>
+        <Card.Text as='h6'>Rating : {show.rating.average}</Card.Text>
       </Card.Body>
     </Card>
   )

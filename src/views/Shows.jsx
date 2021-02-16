@@ -65,6 +65,7 @@ return (
     
     
     <Container>
+      <h1>All Shows</h1>
          <Row>
         <Col xs={12}>
         <form onSubmit={submitSearch}>
@@ -75,7 +76,7 @@ return (
         </Col>
          </Row>
         
-      <h1>All Shows</h1>
+      
       <Row>
         {
         shows.map((show) => (
