@@ -3,8 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./views/Home";
 import OnShow from './views/OnShow';
 import Shows from './views/Shows';
-
-
+import ShowDetail from './components/Show/ShowDetail'
 
 const Routes = () => {
     return (
@@ -12,12 +11,13 @@ const Routes = () => {
         <Route exact path="/">
           <Home />
          </Route>
-         <Route exact path="/onshow">
+         <Route  path="/onshow">
         <OnShow />
       </Route>
-      <Route exact path="/shows">
+      <Route  path="/shows">
         <Shows />
       </Route>
+      <Route path='/show/:id' component={ShowDetail} />
         
         </Switch>
     )
