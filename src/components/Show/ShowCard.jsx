@@ -2,15 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 
-const Movie = ({ show }) => {
+const ShowCard = ({ show }) => {
   return (
     <Card className='my-3 p-3 rounded'>
-      <Link to={`/shows/${show.id}`}>
+      <Link to={`/show/${show.id}`}>
         <Card.Img className='ImageCard' src={show.image.medium} variant='top' />
       </Link>
 
       <Card.Body>
-        <Link to={`/shows/${show.id}`}>
+        <Link to={`/show/${show.id}`}>
           <Card.Title as='div'>
             <strong>{show.name}</strong>
           </Card.Title>
@@ -21,4 +21,4 @@ const Movie = ({ show }) => {
   )
 }
 
-export default Movie
+export default ShowCard

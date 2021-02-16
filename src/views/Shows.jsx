@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { Row, Col ,Container,Button} from 'react-bootstrap'
 import Show from '../components/Show/ShowCard'
@@ -80,7 +81,7 @@ return (
       <Row>
         {
         shows.map((show) => (
-          <Col key={show.id} sm={12} md={6} lg={4} xl={3}>
+          <Col key={show.id} xs={6} sm={6} md={6} lg={4} xl={3}>
             <Show show={show} />
             {/* <p>{show.name}</p> */}
           </Col>

@@ -23,17 +23,17 @@ const Header = () => {
           <Nav className="ml-auto centerText">
             <LinkContainer to="/">
               <Nav.Link>
-                <i class="fas fa-home"></i> Home
+                <i className="fas fa-home"></i> Home
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/shows">
               <Nav.Link>
-                <i class="fas fa-tv"></i> Shows
+                <i className="fas fa-tv"></i> Shows
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/onshow">
               <Nav.Link>
-                <i class="fas fa-tv"></i> On Show Today
+                <i className="fas fa-tv"></i> On Show Today
               </Nav.Link>
             </LinkContainer>
             <Nav.Link>
