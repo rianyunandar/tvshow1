@@ -5,7 +5,7 @@ import { Navbar, Nav } from "react-bootstrap";
 const Header = () => {
   return (
     <>
-       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect >
+      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Navbar.Brand>
           <LinkContainer to="/">
             <img
@@ -31,7 +31,7 @@ const Header = () => {
                 <i className="fas fa-tv"></i> Shows
               </Nav.Link>
             </LinkContainer>
-           
+
             <Nav.Link>
               <i className="fas fa-user"></i> Log in
             </Nav.Link>

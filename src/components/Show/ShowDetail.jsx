@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Container,Card } from "react-bootstrap";
+import { Row, Col, Image, ListGroup, Container, Card } from "react-bootstrap";
 
 export class ShowDetail extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export class ShowDetail extends Component {
                   src={this.state.detail.image.original}
                   alt={this.state.detail.name}
                   fluid
-                  rounded 
+                  rounded
                 />
               </Col>
               <Col md={6}>
@@ -57,7 +57,7 @@ export class ShowDetail extends Component {
                     <b>Premiered:</b> {this.state.detail.premiered}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                  <b>Genre: </b>{" "}
+                    <b>Genre: </b>{" "}
                     {this.state.detail.genres.map((genre, id) => {
                       return <span key={id}>{genre + " "}</span>;
                     })}
@@ -70,12 +70,13 @@ export class ShowDetail extends Component {
                     <b>Rating:</b> {this.state.detail.rating.average}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <b>Schedule:</b> {this.state.detail.schedule.time} <span> </span>
+                    <b>Schedule:</b> {this.state.detail.schedule.time}{" "}
+                    <span> </span>
                     Day:{" "}
                     {this.state.detail.schedule.days.map((day, id) => {
                       return <span key={id}>{day + ","}</span>;
                     })}
-                    <span> Timezone  : </span>
+                    <span> Timezone : </span>
                     {this.state.detail.network.country.timezone}
                   </ListGroup.Item>
                 </ListGroup>
@@ -89,11 +90,12 @@ export class ShowDetail extends Component {
                 </ListGroup.Item>
               </Col>
             </Row>
-            <Row> 
-            <Col md={12}><h3>Cast</h3>
-            </Col></Row>
             <Row>
-           
+              <Col md={12}>
+                <h3>Cast</h3>
+              </Col>
+            </Row>
+            <Row>
               {this.state.detail._embedded.cast.map((actor, id) => (
                 <Col key={id} xs={6} sm={6} md={4} lg={3} xl={2}>
                   <Card className="p-3 rounded">
@@ -104,9 +106,7 @@ export class ShowDetail extends Component {
                     />
 
                     <Card.Body>
-                      <Card.Title as="div">
-                        {actor.person.name}
-                      </Card.Title>
+                      <Card.Title as="div">{actor.person.name}</Card.Title>
                     </Card.Body>
                   </Card>
                 </Col>
