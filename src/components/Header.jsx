@@ -33,7 +33,7 @@ const Header = () => {
             </LinkContainer>
             <LinkContainer to="/onshow">
               <Nav.Link>
-                <i className="fas fa-tv"></i> On Show Today
+                <i className="fas fa-tv"></i> Today
               </Nav.Link>
             </LinkContainer>
             <Nav.Link>
