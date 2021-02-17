@@ -48,5 +48,11 @@
     width: 100px;
     height: 100%;
     object-fit: cover;
+    margin-right: 15px;
     
     }
+
+p{
+  overflow:"hidden" !important;
+  max-height:"150px" !important;
+}
