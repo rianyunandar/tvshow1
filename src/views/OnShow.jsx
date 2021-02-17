@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { Row, Col, Container,Media,Image } from "react-bootstrap";
-import moment from "moment";
+import { Row, Container,Media,Image,Carousel,Col } from "react-bootstrap";
 import ReactPaginate from 'react-paginate';
 
-const idLocale = require("moment/locale/id");
 
-moment.locale("id", idLocale);
 export class OnShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      topShow:[],
       onShow2: [],
       loading: true,
       perPage: 4,
@@ -24,12 +22,23 @@ export class OnShow extends Component {
  
   async receivedData() {
     try {
-     
-      const response2 = await fetch(`https://api.tvmaze.com/schedule`);
+      let response1 = await fetch(`http://api.tvmaze.com/shows`);
+      let response2 = await fetch(`https://api.tvmaze.com/schedule`);
+
+      const json1 = await response1.json()
+
+      let sorted = json1.sort(function(a,b){
+                         
+        return (a.rating.average < b.rating.average) ? 1 : ((b.rating.average < a.rating.average) ? -1 : 0);
+      })
+
+      const slicejson1 = sorted.slice(0,4)
+
       const json2 = await response2.json()
       const slicejson2 = json2.slice(this.state.offset, this.state.offset + this.state.perPage)
 
       this.setState({
+        topShow:slicejson1,
         onShow2: slicejson2,
         loading: false
       });
@@ -54,22 +63,56 @@ export class OnShow extends Component {
     this.receivedData();
   }
   render() {
+    {console.log(this.state.topShow)}
     return (
       <Container>
         {this.state.loading ? (
           <div>Loading...</div>
         ) : (
                 <div>
+                  <Row>
+                    <Col>
+                  <Carousel>
+                  {this.state.topShow.map((item, i) => {
+                return (
+  <Carousel.Item key={i} interval={5000}>
+    
+    <img
+      className=" w-100 CarouselImage"
+      src={item.image?item.image.original :"/logo.png"}
+      alt={item.name}
+    />
+    <img
+      className="d-block CarouselImage2"
+      src={item.image?item.image.original :"/logo.png"}
+      alt={item.name}
+    />
+    <div className="CaraouselHeader"><h5>Best TV Show</h5></div>
+    {/* <Image  className='todayCard d-block abcd' src={item.image ? item.image.original :"/logo.png"}  alt="Generic placeholder" rounded/> */}
+
+    <Carousel.Caption >
+      <div className="CaraouselShadowBox CaraouselTitle"><h3>{item.name}</h3></div>
+      <div className="CaraouselShadowBox">
+      <p>{item.genres.map((genre, id) => {
+                      return <span key={id}>{genre + " "}</span>;
+                    })}</p></div>
+    </Carousel.Caption>
+  </Carousel.Item>
+  );
+})}
+ </Carousel>
+ </Col>
+                  </Row>
                   <h3 className="headerTitle">TV Show Today </h3> 
                   <Row>
                   <ul className="list-unstyled border">
                     
                   {this.state.onShow2.map((item, i) => {
                 return (
-        <Media as="li"key={i} >
+        <Media as="li" key={i} >
            <Image  className='todayCard' src={item.show.image ? item.show.image.medium :"/logo.png"}  alt="Generic placeholder" rounded/>
           <Media.Body>
-            <h5>{item.show.type} <span>  <i class="far fa-clock"></i> </span>{item.show.schedule.time} <span> On </span>{item.show.network.name} Channel</h5>
+            <h5>{item.show.type} <span>  <i className="far fa-clock"></i> </span>{item.show.schedule.time} <span> On </span>{item.show.network.name} Channel</h5>
             <div>
             <div className='todaySummary' dangerouslySetInnerHTML={ { __html: item.show.summary } }></div>
             </div>           

@@ -31,11 +31,7 @@ const Header = () => {
                 <i className="fas fa-tv"></i> Shows
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/onshow">
-              <Nav.Link>
-                <i className="fas fa-tv"></i> Today
-              </Nav.Link>
-            </LinkContainer>
+           
             <Nav.Link>
               <i className="fas fa-user"></i> Log in
             </Nav.Link>
