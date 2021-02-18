@@ -7,6 +7,7 @@ const Header = () => {
   const { isAuthenticated } = useAuth0();
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
+  const { user } = useAuth0();
 
   return (
     <>
@@ -26,6 +27,9 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto centerText">
+          {isAuthenticated ? <Nav.Link>
+              Welcome  {user.name}
+            </Nav.Link> :<i></i>}
             <LinkContainer to="/">
               <Nav.Link>
                 <i className="fas fa-home"></i> Home
