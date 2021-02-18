@@ -19,8 +19,12 @@ export class OnShow extends Component {
 
   async receivedData() {
     try {
-     
-      await axios.get(`http://api.tvmaze.com/shows`)
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+      await axios.get(`http://api.tvmaze.com/shows`,
+      {headers})
       .then(async res => {
         const response1 = res.data;
         let sorted = await response1.sort(function (a, b) {
@@ -34,9 +38,12 @@ export class OnShow extends Component {
         console.log("response1 " + response1)
         this.setState({
           topShow: slicejson1})
+      }).catch((err)=>{
+        alert(JSON.stringify(err.response.data))
       })
      
-      await axios.get(`https://api.tvmaze.com/schedule`)
+      await axios.get(`https://api.tvmaze.com/schedule`,
+      {headers})
       .then(async res => {
         const response2 = res.data;
        
@@ -48,6 +55,8 @@ export class OnShow extends Component {
         onShow2: slicejson2,
         loading: false
         })
+      }).catch((err)=>{
+        alert(JSON.stringify(err.response.data))
       })
       
     } catch (error) {
