@@ -39,8 +39,8 @@ export class ShowDetail extends Component {
               <Col md={6}>
                 <Image
                   className="ImageDetail"
-                  src={this.state.detail.image.original}
-                  alt={this.state.detail.name}
+                  src={this.state.detail.image ? this.state.detail.image.original : "/logo.png"}
+                  alt={this.state.detail.name ? this.state.detail.name : "no info"}
                   fluid
                   rounded
                 />
@@ -48,36 +48,36 @@ export class ShowDetail extends Component {
               <Col md={6}>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
-                    <h3>{this.state.detail.name}</h3>
+                    <h3>{this.state.detail.name ? this.state.detail.name : "no info"}</h3>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <h5>Rating: {this.state.detail.rating.average}</h5>
+                    <h5>Rating: {this.state.detail.rating ? this.state.detail.rating.average : " no info"}</h5>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <b>Premiered:</b> {this.state.detail.premiered}
+                    <b>Premiered:</b> {this.state.detail.premiered ? this.state.detail.premiered : "no info"}
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <b>Genre: </b>{" "}
-                    {this.state.detail.genres.map((genre, id) => {
+                    {this.state.detail.genres ? this.state.detail.genres.map((genre, id) => {
                       return <span key={id}>{genre + " "}</span>;
-                    })}
+                    }) : "no info"}
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <b>Language:</b> <span> </span>
-                    {this.state.detail.language}
+                    {this.state.detail.language ? this.state.detail.language : "no info"}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <b>Rating:</b> {this.state.detail.rating.average}
+                    <b>Rating:</b> {this.state.detail.rating ? this.state.detail.rating.average :"no inof"}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <b>Schedule:</b> {this.state.detail.schedule.time}{" "}
+                    <b>Schedule:</b> {this.state.detail.schedule ? this.state.detail.schedule.time : "00:00"}{" "}
                     <span> </span>
                     Day:{" "}
-                    {this.state.detail.schedule.days.map((day, id) => {
+                    {this.state.detail.schedule ? this.state.detail.schedule.days.map((day, id) => {
                       return <span key={id}>{day + ","}</span>;
-                    })}
+                    }): "No info"}
                     <span> Timezone : </span>
-                    {this.state.detail.network.country.timezone}
+                    {this.state.detail.network ? this.state.detail.network.country.timezone : "no info"}
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
@@ -86,7 +86,7 @@ export class ShowDetail extends Component {
               <Col md={12}>
                 <ListGroup.Item>
                   <h3>Summary</h3>
-                  {this.state.detail.summary}
+                  {this.state.detail.summary ? this.state.detail.summary : "no data"}
                 </ListGroup.Item>
               </Col>
             </Row>
@@ -103,10 +103,11 @@ export class ShowDetail extends Component {
                       className="ImageCard"
                       src={actor.person.image.medium}
                       variant="top"
+                      alt={actor.person.name ? actor.person.name : "no data"}
                     />
 
                     <Card.Body>
-                      <Card.Title as="div">{actor.person.name}</Card.Title>
+                      <Card.Title as="div">{actor.person.name ? actor.person.name : "no data"}</Card.Title>
                     </Card.Body>
                   </Card>
                 </Col>
