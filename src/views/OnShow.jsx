@@ -19,12 +19,11 @@ export class OnShow extends Component {
 
   async receivedData() {
     try {
-    const headers = {
-      "Content-Type": "application/json",
-    }
+   
+    
 
       await axios.get(`http://api.tvmaze.com/shows`,
-      {headers})
+      { crossDomain: true })
       .then(async res => {
         const response1 = res.data;
         let sorted = await response1.sort(function (a, b) {
@@ -41,7 +40,7 @@ export class OnShow extends Component {
       })
      
       await axios.get(`https://api.tvmaze.com/schedule`,
-      {headers})
+      { crossDomain: true })
       .then(async res => {
         const response2 = res.data;
        
