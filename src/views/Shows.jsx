@@ -18,7 +18,7 @@ const Shows = () => {
   };
 
   const getData = async () => {
-    const { data } = await axios.get("http://api.tvmaze.com/shows");
+    const { data } = await axios.get("https://api.tvmaze.com/shows");
     const slice = data.slice(offset, offset + perPage);
     setShows(slice);
     setPageCount(Math.ceil(data.length / perPage));
@@ -30,7 +30,7 @@ const Shows = () => {
   };
   const searchHandler = async () => {
     try {
-      await axios.get(`http://api.tvmaze.com/shows`).then((res) => {
+      await axios.get(`https://api.tvmaze.com/shows`).then((res) => {
         let filteredShow = res.data.filter(
           (o) =>
             o.name.toLowerCase().includes(search.toLowerCase()) ||
