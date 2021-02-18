@@ -19,10 +19,12 @@ export class OnShow extends Component {
 
   async receivedData() {
     try {
-   
+    const headers = {
+      "Content-Type": "application/json",
+    }
     
 
-      await axios.get(`http://api.tvmaze.com/shows`,
+      await axios.get(`https://api.tvmaze.com/shows`,
       { crossDomain: true })
       .then(async res => {
         const response1 = res.data;
