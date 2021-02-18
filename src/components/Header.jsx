@@ -1,8 +1,13 @@
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
+  const { isAuthenticated } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
+  const { logout } = useAuth0();
+
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -31,13 +36,20 @@ const Header = () => {
                 <i className="fas fa-tv"></i> Shows
               </Nav.Link>
             </LinkContainer>
-
-            <Nav.Link>
-              <i className="fas fa-user"></i> Log in
-            </Nav.Link>
-            <Nav.Link>
+            {isAuthenticated ?
+            
+            <Nav.Link
+              onClick={() =>
+                logout({
+                  returnTo: window.location.origin
+                })
+              }
+            >
               <i className="fas fa-user"></i> Log Out
-            </Nav.Link>
+            </Nav.Link>:
+            <Nav.Link onClick={() => loginWithRedirect()}>
+            <i className="fas fa-user"></i> Log in
+          </Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -87,7 +87,7 @@ export class OnShow extends Component {
                         <img
                           className="d-block CarouselImage2"
                           src={item.image ? item.image.medium : "/logo.png"}
-                          alt={item.name}
+                          alt={item.name ? item.name : "TV"}
                         />
                         <div className="CaraouselHeader">
                           <h5>Best TV Show</h5>
@@ -96,7 +96,7 @@ export class OnShow extends Component {
 
                         <Carousel.Caption>
                           <div className="CaraouselShadowBox CaraouselTitle">
-                            <h3>{item.name}</h3>
+                            <h3>{item.name ? item.name : "TV"}</h3>
                           </div>
                           <div className="CaraouselShadowBox">
                             <p>
@@ -128,13 +128,13 @@ export class OnShow extends Component {
                       />
                       <Media.Body>
                         <h5>
-                          {item.show.type}{" "}
+                          {item.show.type ?item.show.type : "TV"}{" "}
                           <span>
                             {" "}
                             <i className="far fa-clock"></i>{" "}
                           </span>
-                          {item.show.schedule.time} <span> On </span>
-                          {item.show.network.name} Channel
+                          {item.show.schedule ? item.show.schedule.time : "00:00"} <span> On </span>
+                          {item.show.network ? item.show.network.name : "TV"} Channel
                         </h5>
                         <div>
                           <div
