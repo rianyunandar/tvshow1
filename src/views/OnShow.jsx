@@ -20,7 +20,7 @@ export class OnShow extends Component {
   async receivedData() {
     try {
     const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      "Content-Type": "application/json",
     }
 
       await axios.get(`http://api.tvmaze.com/shows`,
