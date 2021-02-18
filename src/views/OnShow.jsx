@@ -38,8 +38,6 @@ export class OnShow extends Component {
         console.log("response1 " + response1)
         this.setState({
           topShow: slicejson1})
-      }).catch((err)=>{
-        alert(JSON.stringify(err.response.data))
       })
      
       await axios.get(`https://api.tvmaze.com/schedule`,
@@ -55,8 +53,6 @@ export class OnShow extends Component {
         onShow2: slicejson2,
         loading: false
         })
-      }).catch((err)=>{
-        alert(JSON.stringify(err.response.data))
       })
       
     } catch (error) {
