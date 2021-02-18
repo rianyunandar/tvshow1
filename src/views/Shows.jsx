@@ -18,7 +18,7 @@ const Shows = () => {
   };
 
   const getData = async () => {
-    const { data } = await axios.get("https://api.tvmaze.com/shows");
+    const { data } = await axios.get("https://api.tvmaze.com/shows", { crossDomain: true });
     const slice = data.slice(offset, offset + perPage);
     setShows(slice);
     setPageCount(Math.ceil(data.length / perPage));
