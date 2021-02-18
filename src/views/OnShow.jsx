@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Container, Media, Image, Carousel, Col } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
+import axios from "axios";
 
 export class OnShow extends Component {
   constructor(props) {
@@ -18,32 +19,37 @@ export class OnShow extends Component {
 
   async receivedData() {
     try {
-      let response1 = await fetch(`http://api.tvmaze.com/shows`);
-      let response2 = await fetch(`https://api.tvmaze.com/schedule`);
-
-      const json1 = await response1.json();
-
-      let sorted = json1.sort(function (a, b) {
-        return a.rating.average < b.rating.average
-          ? 1
-          : b.rating.average < a.rating.average
-          ? -1
-          : 0;
-      });
-
-      const slicejson1 = sorted.slice(0, 4);
-
-      const json2 = await response2.json();
-      const slicejson2 = json2.slice(
-        this.state.offset,
-        this.state.offset + this.state.perPage
-      );
-
-      this.setState({
-        topShow: slicejson1,
+     
+      await axios.get(`http://api.tvmaze.com/shows`)
+      .then(async res => {
+        const response1 = res.data;
+        let sorted = await response1.sort(function (a, b) {
+          return a.rating.average < b.rating.average
+            ? 1
+            : b.rating.average < a.rating.average
+            ? -1
+            : 0;
+        });
+        const slicejson1 =  sorted.slice(0, 4);
+        console.log("response1 " + response1)
+        this.setState({
+          topShow: slicejson1})
+      })
+     
+      await axios.get(`https://api.tvmaze.com/schedule`)
+      .then(async res => {
+        const response2 = res.data;
+       
+        const slicejson2 = response2.slice(
+          this.state.offset,
+          this.state.offset + this.state.perPage
+        );  
+       this.setState({
         onShow2: slicejson2,
         loading: false
-      });
+        })
+      })
+      
     } catch (error) {
       alert(JSON.stringify(error.message));
     }
@@ -64,7 +70,7 @@ export class OnShow extends Component {
     );
   };
   async componentDidMount() {
-    this.receivedData();
+   this.receivedData();
   }
   render() {
     return (
