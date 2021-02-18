@@ -19,43 +19,38 @@ export class OnShow extends Component {
 
   async receivedData() {
     try {
-    const headers = {
-      "Content-Type": "application/json",
-    }
-    
-
-      await axios.get(`https://api.tvmaze.com/shows`,
-      { crossDomain: true })
-      .then(async res => {
-        const response1 = res.data;
-        let sorted = await response1.sort(function (a, b) {
-          return a.rating.average < b.rating.average
-            ? 1
-            : b.rating.average < a.rating.average
-            ? -1
-            : 0;
+      await axios
+        .get(`https://api.tvmaze.com/shows`, { crossDomain: true })
+        .then(async (res) => {
+          const response1 = res.data;
+          let sorted = await response1.sort(function (a, b) {
+            return a.rating.average < b.rating.average
+              ? 1
+              : b.rating.average < a.rating.average
+              ? -1
+              : 0;
+          });
+          const slicejson1 = sorted.slice(0, 4);
+          console.log("response1 " + response1);
+          this.setState({
+            topShow: slicejson1
+          });
         });
-        const slicejson1 =  sorted.slice(0, 4);
-        console.log("response1 " + response1)
-        this.setState({
-          topShow: slicejson1})
-      })
-     
-      await axios.get(`https://api.tvmaze.com/schedule`,
-      { crossDomain: true })
-      .then(async res => {
-        const response2 = res.data;
-       
-        const slicejson2 = response2.slice(
-          this.state.offset,
-          this.state.offset + this.state.perPage
-        );  
-       this.setState({
-        onShow2: slicejson2,
-        loading: false
-        })
-      })
-      
+
+      await axios
+        .get(`https://api.tvmaze.com/schedule`, { crossDomain: true })
+        .then(async (res) => {
+          const response2 = res.data;
+
+          const slicejson2 = response2.slice(
+            this.state.offset,
+            this.state.offset + this.state.perPage
+          );
+          this.setState({
+            onShow2: slicejson2,
+            loading: false
+          });
+        });
     } catch (error) {
       alert(JSON.stringify(error.message));
     }
@@ -76,7 +71,7 @@ export class OnShow extends Component {
     );
   };
   async componentDidMount() {
-   this.receivedData();
+    this.receivedData();
   }
   render() {
     return (
@@ -140,13 +135,19 @@ export class OnShow extends Component {
                       />
                       <Media.Body>
                         <h5>
-                          {item.show.type ?item.show.type : "TV"}{" "}
+                          {item.show.type ? item.show.type : "TV"}{" "}
                           <span>
                             {" "}
                             <i className="far fa-clock"></i>{" "}
                           </span>
-                          {item.show.schedule ? item.show.schedule.time : "00:00"} <span> On </span>
-                          {item.show.network ? item.show.network.name : "TV"} Channel
+                          {item.show.schedule
+                            ? item.show.schedule.time
+                            : "00:00"}{" "}
+                          <span> On </span>
+                          {item.show.network
+                            ? item.show.network.name
+                            : "TV"}{" "}
+                          Channel
                         </h5>
                         <div>
                           <div
